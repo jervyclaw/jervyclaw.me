@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Telegram Bot Services - Fast & Affordable</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0088cc;
+            --bg: #0a0a0a;
+            --card: #141414;
+            --text: #fff;
+            --text-dim: #666;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        
+        h1 { text-align: center; font-size: 2.2rem; margin-bottom: 10px; }
+        .tagline { text-align: center; color: var(--text-dim); margin-bottom: 40px; }
+        
+        .card {
+            background: var(--card);
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .service {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .service-info h3 { margin-bottom: 5px; }
+        .service-info p { color: var(--text-dim); font-size: 0.9rem; }
+        
+        .price { 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        
+        .order-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: var(--text-dim); }
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .hidden { display: none; }
+        
+        .success {
+            text-align: center;
+            padding: 40px;
+        }
+        .success-icon { font-size: 4rem; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Bot Services</h1>
+        <p class="tagline">Custom Telegram bots, fast delivery. Order below.</p>
+        
+        <div id="services">
+            <div class="card">
+                <div class="service">
+                    <div class="service-info">
+                        <h3>Welcome Bot</h3>
+                        <p>Greet new group members automatically</p>
+                    </div>
+                    <div class="price">$25</div>
+                </div>
+                
+                <div class="service">
+                    <div class="service-info">
+                        <h3>Auto-Reply Bot</h3>
+                        <p>Keyword-triggered responses</p>
+                    </div>
+                    <div class="price">$35</div>
+                </div>
+                
+                <div class="service">
+                    <div class="service-info">
+                        <h3>Moderation Bot</h3>
+                        <p>Spam filter, word blocking, user management</p>
+                    </div>
+                    <div class="price">$40</div>
+                </div>
+                
+                <div class="service">
+                    <div class="service-info">
+                        <h3>Custom Bot</h3>
+                        <p>Any bot, any feature - tell me what you need</p>
+                    </div>
+                    <div class="price">$50+</div>
+                </div>
+            </div>
+            
+            <button class="order-btn" onclick="showForm()">Order Now</button>
+        </div>
+        
+        <div id="form" class="card hidden">
+            <h2 style="margin-bottom: 20px;">📝 Order Details</h2>
+            <form onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Service</label>
+                    <select id="service">
+                        <option>Welcome Bot ($25)</option>
+                        <option>Auto-Reply Bot ($35)</option>
+                        <option>Moderation Bot ($40)</option>
+                        <option>Custom Bot ($50+)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Describe what you need</label>
+                    <textarea id="details" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="order-btn">Submit Order</button>
+            </form>
+        </div>
+        
+        <div id="success" class="card hidden">
+            <div class="success">
+                <div class="success-icon">✅</div>
+                <h2>Order Received!</h2>
+                <p style="color: var(--text-dim); margin-top: 10px;">I'll contact you within 24 hours.</p>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 30px; color: var(--text-dim);">
+            Questions? Message @JervyShi on Telegram
+        </p>
+    </div>
+    
+    <script>
+        function showForm() {
+            document.getElementById('services').classList.add('hidden');
+            document.getElementById('form').classList.remove('hidden');
+        }
+        
+        function submitOrder(e) {
+            e.preventDefault();
+            
+            const order = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                service: document.getElementById('service').value,
+                details: document.getElementById('details').value,
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage for now
+            const orders = JSON.parse(localStorage.getItem('bot_orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('bot_orders', JSON.stringify(orders));
+            
+            document.getElementById('form').classList.add('hidden');
+            document.getElementById('success').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
